@@ -31,7 +31,8 @@ while True:
         
         
     elif command =="exit":
-        pass
+        print("Goodbye!")
+        break
     elif command == "st":
         pass
 
