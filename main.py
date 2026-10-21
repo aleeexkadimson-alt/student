@@ -18,7 +18,7 @@ all_commands = {
 }
 
 while True:
-    entered = input("Enter command").split()
+    entered = input("Enter command: ").split()
     command = entered[0]
 
     if command == "help":
@@ -34,20 +34,85 @@ while True:
         print("Goodbye!")
         break
     elif command == "st":
-         print("ID - name - group - grades")
-         for st_id in students.keys():
+        if len(entered) > 1:
+            st_id = entered[1]
+            if st_id not in students:
+                print("Student ID not found!")
+                continue
+    elif command == "st_add":
+        st_id = input("Enter student ID:")
+        if st_id in students:
+            print("Students with this ID already exists.")
+            continue
+
+        st_name = input("Enter student name:")
+        st_group = input("Enter studenr group:") 
+        st_grades = []
+
+        student = {"name": st_name, "group": st_group, "grades": st_grades}  
+        student[st_id] = student
+        print("Student")
+    elif command == "st_rm":
+            
+    
+
+
+
+
+
+
+
+
+
+
+
+
             student = students[st_id]
-            grades = student["grades"]
+            grades = student["grades"].copy()
             for i in range(len(grades)):
                 grades[i] = str(grades[i])
-
             if len(grades) == 0:
                 grades_str = "Empty grades"
             else:
                 grades_str = " ".join(grades)  
-                 
-            print(f"{st_id} - {student["name"]} - {student["group"]} - {student["grades_str"]} ")
+           
 
-        #<ID> - <name> - <group> - <grades>
+            grades = student["grades"]
+            grades_summ = 0
+            for grade in grades:
+                grades_summ += grade
+            if len(grades) > 0:
+                avg_grade = grades_summ / len(grades)
 
-    print()
+            else:
+                avg_grade = "N/A"
+            
+
+            
+              
+        else:
+            print("ID - name - group - grades")
+            for st_id in students.keys():
+                student = students[st_id]
+                grades = student["grades"].copy()
+            
+                for i in range(len(grades)):
+                    grades[i] = str(grades[i])
+
+                if len(grades) == 0:
+                    grades_str = "Empty grades"
+                else:
+                    grades_str = " ".join(grades)  
+
+                print(f"{st_id} - {student["name"]} - {student["group"]} - {grades_str} ")
+    
+    
+    
+    
+    
+    
+    else:
+        print("Command not found. Enter 'help' for all commands.")
+            #<ID> - <name> - <group> - <grades>
+
+print()
